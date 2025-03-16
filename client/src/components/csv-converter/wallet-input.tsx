@@ -12,7 +12,7 @@ export default function WalletInput({ form }: { form: any }) {
           <FormControl>
             <Input 
               placeholder="Enter your PulseChain wallet address" 
-              className="w-full px-4 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-blue-200 rounded-md bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               {...field} 
             />
           </FormControl>
