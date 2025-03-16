@@ -7,10 +7,11 @@ export default function Home() {
         {/* App Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 text-transparent bg-clip-text">
-            PulseChain CSV Converter
+            PulseChain to Coin Tracker
           </h1>
           <p className="text-blue-700 mt-2">
-            Add your wallet address to CSV files for tax reporting and tracking
+            Converts your PulseChain wallet transaction history downloaded from
+            the explorer into a CSV file that can be uploaded to Coin Tracker
           </p>
         </div>
 
