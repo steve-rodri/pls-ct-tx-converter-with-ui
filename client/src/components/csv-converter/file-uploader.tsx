@@ -34,12 +34,12 @@ export default function FileUploader({ form }: { form: any }) {
       name="file"
       render={({ field: { onChange, value, ...field } }) => (
         <FormItem className="space-y-2">
-          <FormLabel className="text-sm font-medium text-slate-700">CSV File</FormLabel>
+          <FormLabel className="text-sm font-medium text-purple-700">CSV File</FormLabel>
           <FormControl>
             <div 
               {...getRootProps()} 
               className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                isDragActive ? "border-primary bg-blue-50" : "border-slate-300 hover:border-primary"
+                isDragActive ? "border-primary bg-purple-50" : "border-purple-200 hover:border-primary"
               }`}
             >
               <input 
@@ -61,20 +61,20 @@ export default function FileUploader({ form }: { form: any }) {
               {/* Default State */}
               {fileState === "default" && (
                 <div className="space-y-2">
-                  <i className="fas fa-cloud-upload-alt text-4xl text-slate-400"></i>
-                  <p className="text-slate-600">Drag & drop your CSV file here</p>
-                  <p className="text-slate-500 text-sm">or click to browse</p>
+                  <i className="fas fa-cloud-upload-alt text-4xl text-purple-400"></i>
+                  <p className="text-purple-700">Drag & drop your CSV file here</p>
+                  <p className="text-purple-500 text-sm">or click to browse</p>
                 </div>
               )}
               
               {/* File Selected State */}
               {fileState === "success" && (
                 <div className="space-y-2">
-                  <i className="fas fa-file-csv text-4xl text-green-500"></i>
-                  <p className="text-slate-700 font-medium">
+                  <i className="fas fa-file-csv text-4xl text-purple-600"></i>
+                  <p className="text-purple-800 font-medium">
                     {value?.name || "File selected"}
                   </p>
-                  <p className="text-slate-500 text-sm">
+                  <p className="text-purple-500 text-sm">
                     Click or drag another file to change
                   </p>
                 </div>
