@@ -27,11 +27,18 @@ export default function ConverterForm() {
 
   const convertMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await apiRequest("POST", "/api/convert-csv", undefined, {
+      // We can't use the apiRequest helper directly because it sets JSON content type
+      // For FormData, we need to let the browser set the content type with boundary
+      const response = await fetch("/api/convert-csv", {
         method: "POST",
         body: data,
-        headers: {}, // Remove Content-Type to let browser set it with boundary
+        credentials: "include"
       });
+      
+      if (!response.ok) {
+        const text = await response.text() || response.statusText;
+        throw new Error(`${response.status}: ${text}`);
+      }
       
       return response;
     },
@@ -95,7 +102,7 @@ export default function ConverterForm() {
             {convertMutation.isPending ? (
               <Button 
                 disabled 
-                className="w-full bg-primary text-white"
+                className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-medium"
               >
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Processing...
@@ -103,7 +110,7 @@ export default function ConverterForm() {
             ) : (
               <Button 
                 type="submit" 
-                className="w-full bg-primary text-white hover:bg-blue-600"
+                className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-medium hover:from-purple-700 hover:to-fuchsia-700 transition-all"
               >
                 Convert & Download
               </Button>

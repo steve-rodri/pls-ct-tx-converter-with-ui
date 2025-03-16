@@ -8,11 +8,11 @@ export default function WalletInput({ form }: { form: any }) {
       name="walletAddress"
       render={({ field }) => (
         <FormItem className="space-y-2">
-          <FormLabel className="text-sm font-medium text-slate-700">Wallet Address</FormLabel>
+          <FormLabel className="text-sm font-medium text-purple-700">Wallet Address</FormLabel>
           <FormControl>
             <Input 
-              placeholder="Enter your wallet address" 
-              className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="Enter your PulseChain wallet address" 
+              className="w-full px-4 py-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               {...field} 
             />
           </FormControl>
