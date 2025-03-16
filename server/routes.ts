@@ -1,13 +1,10 @@
 import type { Express, Request, Response } from "express"
 import { createServer, type Server } from "http"
-import { storage } from "./storage"
 import { csvConversionSchema } from "@shared/schema"
 import { ZodError } from "zod"
 import multer from "multer"
-import { parse } from "csv-parse"
-import { stringify } from "csv-stringify/sync"
-import { Readable } from "stream"
 import { z } from "zod"
+import { processCsvFile } from "./processCSV/processCSV"
 
 // Set up multer for file handling
 const upload = multer({
@@ -70,41 +67,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   const httpServer = createServer(app)
   return httpServer
-}
-
-// Process CSV file
-async function processCsvFile(
-  buffer: Buffer,
-  walletAddress: string,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const records: any[] = []
-
-    // Create a readable stream from the buffer
-    const stream = Readable.from(buffer)
-
-    // Parse the CSV file
-    stream
-      .pipe(parse({ columns: true, trim: true }))
-      .on("data", (record) => {
-        // Add wallet address to each record
-        record.walletAddress = walletAddress
-        records.push(record)
-      })
-      .on("error", (error) => {
-        reject(error)
-      })
-      .on("end", () => {
-        // Convert back to CSV
-        try {
-          const columns =
-            records.length > 0 ? Object.keys(records[0]) : ["walletAddress"]
-
-          const result = stringify(records, { header: true, columns })
-          resolve(result)
-        } catch (error) {
-          reject(error)
-        }
-      })
-  })
 }
